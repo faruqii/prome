@@ -1,0 +1,27 @@
+{
+  "title": "Go App Metrics",
+  "panels": [
+    {
+      "title": "Requests Total",
+      "type": "graph",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "rate(myapp_requests_total[1m])",
+          "legendFormat": "Requests per second"
+        }
+      ]
+    },
+    {
+      "title": "Request Duration",
+      "type": "heatmap",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(myapp_request_duration_seconds_bucket[5m])) by (le))",
+          "legendFormat": "95th percentile"
+        }
+      ]
+    }
+  ]
+}
